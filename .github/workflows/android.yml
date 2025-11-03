@@ -12,10 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: subosito/flutter-action@v2
+- uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.11.0-88.0.dev'
-
+        flutter-version: '3.11' # Versión base, el canal ayuda a encontrar el dev build
+        channel: 'beta' # ¡Esto es la clave! Fuerza el canal de desarrollo.
     - run: flutter pub get
 
     - run: flutter clean
