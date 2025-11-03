@@ -1,0 +1,30 @@
+name: Flutter Build APK
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.x'
+
+    - run: flutter pub get
+
+    - run: flutter clean
+
+    # Compilación. Usa --release para generar el APK final
+    - run: flutter build apk --release
+
+    # Empaquetar el APK y subirlo como un artefacto
+    - uses: actions/upload-artifact@v3
+      with:
+        name: release-apk
+        path: build/app/outputs/flutter-apk/app-release.apk
